@@ -10,6 +10,12 @@ export default function curl( request ){
 
   if ( headers && headers.size ) {
     for( let p of request.get("headers").entries() ){
+
+      // Mask authorization header so that it wont be shown in curl command
+      if (h == "Authorization") {
+          v = "**********";
+      }
+
       let [ h,v ] = p
       type = v
       curlified.push( "-H " )

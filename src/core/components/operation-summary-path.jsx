@@ -30,6 +30,12 @@ export default class OperationSummaryPath extends PureComponent{
 
     const DeepLink = getComponent( "DeepLink" )
 
+    // If the path contains a tag, convert the tag to a text for description
+    var idx = path.lastIndexOf("#");
+    if (idx > 0) {
+      path  = path.substring(0, idx) + "   " + path.substring(idx+1);}
+    }
+
     return(
       <span className={ deprecated ? "opblock-summary-path__deprecated" : "opblock-summary-path" } >
               <DeepLink
