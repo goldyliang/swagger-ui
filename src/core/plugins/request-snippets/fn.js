@@ -98,6 +98,10 @@ const curlify = (request, escape, newLine, ext = "") => {
       addNewLine()
       addIndent()
       let [h, v] = p
+      // Mask authorization header so that it wont be shown in curl command
+      if (h == "Authorization") {
+          v = "**********";
+      }
       addWordsWithoutLeadingSpace("-H", `${h}: ${v}`)
       isMultipartFormDataRequest = isMultipartFormDataRequest || /^content-type$/i.test(h) && /^multipart\/form-data$/i.test(v)
     }
